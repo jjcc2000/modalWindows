@@ -4,20 +4,22 @@ const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.close-modal');
 const btnOpenModal = document.querySelectorAll('.show-modal');
 
-const contentShow = function () {
+const contenRemover = function () {
   modals.classList.add('hidden');
   overlay.classList.add('hidden');
 };
-const contenRemover = function () {
+const contentShow = function () {
   modals.classList.remove('hidden');
   overlay.classList.remove('hidden');
 };
 for (let i = 0; i < btnOpenModal.length; i++) {
-  btnOpenModal[i].addEventListener('click', contenRemover);
+  btnOpenModal[i].addEventListener('click', contentShow);
 }
+
 document.addEventListener('keydown', function (e) {
-  alert(`The key ${e.key} was presed!! `);
+  if (e.key === 'Escape' && !modals.classList.contains('hidden'))
+    contenRemover();
 });
 
-btnCloseModal.addEventListener('click', contentShow);
-overlay.addEventListener('click', contentShow);
+btnCloseModal.addEventListener('click', contenRemover);
+overlay.addEventListener('click', contenRemover);
